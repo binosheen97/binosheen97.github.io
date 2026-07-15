@@ -11,24 +11,29 @@
     style.textContent = `
         #fb-btn {
             position: fixed;
-            right: -42px;
-            top: 50%;
-            transform: translateY(-50%) rotate(-90deg);
+            bottom: 25px;
+            right: 25px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 10px 18px;
-            border-radius: 10px 10px 0 0;
-            font-size: 13px;
+            padding: 13px 20px;
+            border-radius: 50px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             z-index: 9998;
-            transition: right 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 25px rgba(102,126,234,0.5);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        #fb-btn:hover { right: -35px; }
+        #fb-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(102,126,234,0.6);
+        }
 
         #fb-overlay {
             display: none;
@@ -207,7 +212,7 @@
     const btn = document.createElement('button');
     btn.id = 'fb-btn';
     btn.innerHTML = '💬 Feedback';
-    btn.onclick = openWidget;
+    btn.title = 'Send feedback or report an issue';
     document.body.appendChild(btn);
 
     // Create overlay + modal
