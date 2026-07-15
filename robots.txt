@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://binosheen97.github.io/sitemap.xml
