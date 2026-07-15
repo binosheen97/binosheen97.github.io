@@ -1,345 +1,443 @@
-/**
- * Feedback Widget
- * Floating feedback button for Free Online Tools
- * Formspree endpoint: https://formspree.io/f/mgogoezr
- */
-(function () {
-    const FORMSPREE_URL = 'https://formspree.io/f/mgogoezr';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Free Online Tools - Calculator, Converter & Productivity Hub</title>
+    <meta name="description" content="Free online tools: age calculator, BMI, calorie, mortgage, pregnancy, loan, tip calculators, unit converter, password generator, word counter, stopwatch, Pomodoro timer and more. No registration.">
+    <meta name="keywords" content="free online tools, age calculator, bmi calculator, calorie calculator, mortgage calculator, pregnancy calculator, loan calculator, tip calculator, percentage calculator, unit converter, password generator, word counter, stopwatch, pomodoro timer">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://binosheen97.github.io/">
+    <meta name="author" content="Free Online Tools">
 
-    // Inject styles
-    const style = document.createElement('style');
-    style.textContent = `
-        #fb-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
+    <!-- Open Graph (Social Sharing) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://binosheen97.github.io/">
+    <meta property="og:title" content="Free Online Tools - Calculators, Converters & More">
+    <meta property="og:description" content="Free online tools including calculators, converters, and security tools. Fast, accurate, no registration required.">
+    <meta property="og:site_name" content="Free Online Tools">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free Online Tools - Calculators, Converters & More">
+    <meta name="twitter:description" content="Free online tools including calculators, converters, and security tools. No registration required.">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Free Online Tools",
+        "url": "https://binosheen97.github.io/",
+        "description": "Free online tools including calculators, converters, and security tools",
+        "potentialAction": {"@type": "SearchAction", "target": "https://binosheen97.github.io/", "query-input": "required name=search_term_string"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Free Online Tools",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Age Calculator", "url": "https://binosheen97.github.io/age-calculator/"},
+            {"@type": "ListItem", "position": 2, "name": "BMI Calculator", "url": "https://binosheen97.github.io/bmi-calculator/"},
+            {"@type": "ListItem", "position": 3, "name": "Percentage Calculator", "url": "https://binosheen97.github.io/percentage-calculator/"},
+            {"@type": "ListItem", "position": 4, "name": "Date Calculator", "url": "https://binosheen97.github.io/date-calculator/"},
+            {"@type": "ListItem", "position": 5, "name": "Loan EMI Calculator", "url": "https://binosheen97.github.io/loan-calculator/"},
+            {"@type": "ListItem", "position": 6, "name": "Calorie Calculator", "url": "https://binosheen97.github.io/calorie-calculator/"},
+            {"@type": "ListItem", "position": 7, "name": "Tip Calculator", "url": "https://binosheen97.github.io/tip-calculator/"},
+            {"@type": "ListItem", "position": 8, "name": "Mortgage Calculator", "url": "https://binosheen97.github.io/mortgage-calculator/"},
+            {"@type": "ListItem", "position": 9, "name": "Pregnancy Calculator", "url": "https://binosheen97.github.io/pregnancy-calculator/"},
+            {"@type": "ListItem", "position": 10, "name": "Unit Converter", "url": "https://binosheen97.github.io/unit-converter/"},
+            {"@type": "ListItem", "position": 11, "name": "Password Generator", "url": "https://binosheen97.github.io/password-generator/"},
+            {"@type": "ListItem", "position": 12, "name": "Word Counter", "url": "https://binosheen97.github.io/word-counter/"},
+            {"@type": "ListItem", "position": 13, "name": "Case Converter", "url": "https://binosheen97.github.io/case-converter/"},
+            {"@type": "ListItem", "position": 14, "name": "Stopwatch Timer", "url": "https://binosheen97.github.io/stopwatch/"},
+            {"@type": "ListItem", "position": 15, "name": "Pomodoro Timer", "url": "https://binosheen97.github.io/pomodoro/"}
+        ]
+    }
+    </script>
+
+    <!-- Google Verification -->
+    <meta name="google-site-verification" content="cBtI9qnEEtgjEyN--AIkGKP__lNGdHbMJEZI72XqDSo" />
+    <meta name="google-adsense-account" content="ca-pub-9209701505864374">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QV903LBHRQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QV903LBHRQ');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9209701505864374" crossorigin="anonymous"></script>
+
+    <!-- Feedback Widget -->
+    <script src="https://binosheen97.github.io/feedback-widget.js" defer></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
             color: white;
-            border: none;
-            padding: 13px 20px;
-            border-radius: 50px;
-            font-size: 14px;
+            padding: 60px 20px 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 20px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .category-section { margin-top: 50px; }
+
+        .category-header {
+            color: white;
+            font-size: 26px;
             font-weight: 700;
-            cursor: pointer;
-            z-index: 9998;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 25px rgba(102,126,234,0.5);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            white-space: nowrap;
+            margin-bottom: 20px;
+            padding: 0 5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
-            gap: 6px;
-        }
-        #fb-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 35px rgba(102,126,234,0.6);
+            gap: 12px;
         }
 
-        #fb-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
+        .category-header::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
         }
-        #fb-overlay.open { display: flex; }
 
-        #fb-modal {
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 25px;
+        }
+
+        .tool-card {
             background: white;
             border-radius: 20px;
-            padding: 30px;
-            width: 90%;
-            max-width: 440px;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            animation: fbSlideIn 0.3s ease;
-        }
-
-        @keyframes fbSlideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        #fb-modal h3 {
-            font-size: 20px;
-            font-weight: 800;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        #fb-modal .fb-subtitle {
-            font-size: 13px;
-            color: #888;
-            margin-bottom: 20px;
-        }
-
-        #fb-modal .fb-type-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 18px;
-        }
-
-        #fb-modal .fb-type-btn {
-            padding: 8px 4px;
-            border: 2px solid #e0e0e0;
-            background: white;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
+            padding: 35px 25px;
             text-align: center;
-            transition: all 0.2s;
-            color: #555;
-        }
-
-        #fb-modal .fb-type-btn span {
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
             display: block;
-            font-size: 18px;
-            margin-bottom: 3px;
+            position: relative;
         }
 
-        #fb-modal .fb-type-btn.selected {
-            border-color: #667eea;
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+        }
+
+        .icon { font-size: 52px; margin-bottom: 15px; }
+
+        .tool-card h2 { font-size: 22px; color: #667eea; margin-bottom: 12px; font-weight: 700; }
+
+        .tool-card p { color: #666; font-size: 14px; line-height: 1.6; margin-bottom: 18px; }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 14px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-        }
-
-        #fb-modal .fb-field {
-            margin-bottom: 14px;
-        }
-
-        #fb-modal .fb-field label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #555;
-            margin-bottom: 6px;
-        }
-
-        #fb-modal .fb-field input,
-        #fb-modal .fb-field textarea,
-        #fb-modal .fb-field select {
-            width: 100%;
-            padding: 11px 14px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 14px;
-            font-family: inherit;
-            outline: none;
-            transition: border-color 0.3s;
-            box-sizing: border-box;
-            color: #333;
-        }
-
-        #fb-modal .fb-field input:focus,
-        #fb-modal .fb-field textarea:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
-        }
-
-        #fb-modal .fb-field textarea {
-            height: 100px;
-            resize: vertical;
-        }
-
-        #fb-modal .fb-footer {
-            display: flex;
-            gap: 10px;
-            margin-top: 5px;
-        }
-
-        #fb-modal .fb-cancel {
-            flex: 1;
-            padding: 13px;
-            border: 2px solid #e0e0e0;
-            background: white;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            color: #555;
-            transition: all 0.2s;
-        }
-
-        #fb-modal .fb-cancel:hover { background: #f5f5f5; }
-
-        #fb-modal .fb-submit {
-            flex: 2;
-            padding: 13px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 6px 20px rgba(102,126,234,0.3);
-        }
-
-        #fb-modal .fb-submit:hover { transform: translateY(-1px); box-shadow: 0 8px 25px rgba(102,126,234,0.4); }
-        #fb-modal .fb-submit:disabled { opacity: 0.6; cursor: wait; transform: none; }
-
-        #fb-modal .fb-success {
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        #fb-modal .fb-success .fb-tick { font-size: 48px; margin-bottom: 12px; }
-        #fb-modal .fb-success h4 { font-size: 20px; font-weight: 800; color: #27ae60; margin-bottom: 8px; }
-        #fb-modal .fb-success p { font-size: 14px; color: #666; }
-
-        #fb-page-info {
+            border-radius: 20px;
             font-size: 11px;
-            color: #aaa;
-            margin-bottom: 16px;
-            background: #f8f9ff;
-            padding: 8px 12px;
-            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        @media (max-width: 480px) {
-            #fb-modal { padding: 22px 18px; }
-            #fb-modal .fb-type-grid { grid-template-columns: repeat(2, 1fr); }
+        .coming-soon { opacity: 0.6; cursor: default; }
+        .coming-soon:hover { transform: none !important; box-shadow: 0 20px 60px rgba(0,0,0,0.2) !important; }
+        .coming-soon::after {
+            content: 'Coming Soon';
+            position: absolute;
+            top: 14px; right: 14px;
+            background: #f5576c;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
         }
-    `;
-    document.head.appendChild(style);
 
-    // Create floating button
-    const btn = document.createElement('button');
-    btn.id = 'fb-btn';
-    btn.innerHTML = '💬 Feedback';
-    btn.title = 'Send feedback or report an issue';
-    document.body.appendChild(btn);
+        footer { text-align: center; color: white; padding: 60px 20px 40px; opacity: 0.9; }
+        footer p { margin-bottom: 12px; line-height: 2; }
+        footer a { color: white; text-decoration: none; margin: 0 8px; transition: opacity 0.3s; }
+        footer a:hover { opacity: 0.8; }
 
-    // Create overlay + modal
-    const overlay = document.createElement('div');
-    overlay.id = 'fb-overlay';
-    overlay.innerHTML = `
-        <div id="fb-modal">
-            <h3>💬 Send Feedback</h3>
-            <p class="fb-subtitle">Report a bug, suggest a feature, or share your thoughts!</p>
-            <div id="fb-page-info">📍 Page: <strong>${document.title || window.location.pathname}</strong></div>
+        @media (max-width: 768px) {
+            h1 { font-size: 36px; }
+            .subtitle { font-size: 18px; }
+            .tools-grid { grid-template-columns: 1fr; }
+            .category-header { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛠️ Free Online Tools</h1>
+            <p class="subtitle">Fast, accurate, and easy-to-use tools for everyday needs — completely free, no registration required!</p>
+        </header>
 
-            <div class="fb-type-grid">
-                <button class="fb-type-btn selected" onclick="fbSelectType(this, 'Bug Report')"><span>🐛</span>Bug</button>
-                <button class="fb-type-btn" onclick="fbSelectType(this, 'Feature Request')"><span>💡</span>Idea</button>
-                <button class="fb-type-btn" onclick="fbSelectType(this, 'General Feedback')"><span>💬</span>General</button>
-                <button class="fb-type-btn" onclick="fbSelectType(this, 'Other')"><span>❓</span>Other</button>
-            </div>
-
-            <div class="fb-field">
-                <label>Your Message *</label>
-                <textarea id="fb-message" placeholder="Describe the issue or suggestion in detail..."></textarea>
-            </div>
-
-            <div class="fb-field">
-                <label>Your Email (optional — for follow-up)</label>
-                <input type="email" id="fb-email" placeholder="your@email.com">
-            </div>
-
-            <div class="fb-footer">
-                <button class="fb-cancel" onclick="closeFb()">Cancel</button>
-                <button class="fb-submit" id="fb-submit-btn" onclick="submitFeedback()">📤 Send Feedback</button>
+        <!-- CALCULATORS -->
+        <div class="category-section">
+            <h2 class="category-header">🧮 Calculators</h2>
+            <div class="tools-grid">
+                <a href="/age-calculator/" class="tool-card">
+                    <div class="icon">🎂</div>
+                    <h2>Age Calculator</h2>
+                    <p>Calculate your exact age in years, months, days, hours, minutes, and seconds. Find out when your next birthday is!</p>
+                    <span class="tag">Popular</span>
+                </a>
+                <a href="/bmi-calculator/" class="tool-card">
+                    <div class="icon">⚖️</div>
+                    <h2>BMI Calculator</h2>
+                    <p>Calculate your Body Mass Index and find out if you're in a healthy weight range based on your height and weight.</p>
+                    <span class="tag">Health</span>
+                </a>
+                <a href="/percentage-calculator/" class="tool-card">
+                    <div class="icon">🔢</div>
+                    <h2>Percentage Calculator</h2>
+                    <p>Calculate percentages, percentage increase/decrease, discount prices, and find what percentage one number is of another.</p>
+                    <span class="tag">Math</span>
+                </a>
+                <a href="/date-calculator/" class="tool-card">
+                    <div class="icon">📅</div>
+                    <h2>Date Calculator</h2>
+                    <p>Calculate the difference between two dates, add or subtract days, and find how many days until any date.</p>
+                    <span class="tag">Time</span>
+                </a>
+                <a href="/loan-calculator/" class="tool-card">
+                    <div class="icon">💰</div>
+                    <h2>Loan / EMI Calculator</h2>
+                    <p>Calculate monthly EMI payments, total interest, and loan amortization schedule for any loan.</p>
+                    <span class="tag">Finance</span>
+                </a>
+                <a href="/calorie-calculator/" class="tool-card">
+                    <div class="icon">🔥</div>
+                    <h2>Calorie Calculator</h2>
+                    <p>Calculate your daily calorie needs based on age, gender, weight, height, and activity level.</p>
+                    <span class="tag">Health</span>
+                </a>
+                <a href="/tip-calculator/" class="tool-card">
+                    <div class="icon">💰</div>
+                    <h2>Tip Calculator</h2>
+                    <p>Calculate restaurant tips, split bills between friends, and find the total per person instantly.</p>
+                    <span class="tag">Finance</span>
+                </a>
+                <a href="/mortgage-calculator/" class="tool-card">
+                    <div class="icon">🏠</div>
+                    <h2>Mortgage Calculator</h2>
+                    <p>Calculate monthly mortgage payments, total interest, and full amortization schedule for any home loan.</p>
+                    <span class="tag">Finance</span>
+                </a>
+                <a href="/pregnancy-calculator/" class="tool-card">
+                    <div class="icon">🤰</div>
+                    <h2>Pregnancy Calculator</h2>
+                    <p>Calculate your due date, current pregnancy week, trimester, and key milestones from your last period or conception date.</p>
+                    <span class="tag">Health</span>
+                </a>
             </div>
         </div>
-    `;
-    overlay.onclick = function(e) { if (e.target === overlay) closeFb(); };
-    document.body.appendChild(overlay);
 
-    // Expose functions globally
-    window.openWidget = function() {
-        overlay.classList.add('open');
-        document.getElementById('fb-message').focus();
-    };
-
-    window.closeFb = function() {
-        overlay.classList.remove('open');
-        // Reset form after short delay
-        setTimeout(resetForm, 300);
-    };
-
-    let selectedType = 'Bug Report';
-
-    window.fbSelectType = function(btn, type) {
-        document.querySelectorAll('.fb-type-btn').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        selectedType = type;
-    };
-
-    window.submitFeedback = async function() {
-        const message = document.getElementById('fb-message').value.trim();
-        const email = document.getElementById('fb-email').value.trim();
-
-        if (!message) {
-            document.getElementById('fb-message').focus();
-            document.getElementById('fb-message').style.borderColor = '#e74c3c';
-            setTimeout(() => { document.getElementById('fb-message').style.borderColor = '#e0e0e0'; }, 2000);
-            return;
-        }
-
-        const submitBtn = document.getElementById('fb-submit-btn');
-        submitBtn.disabled = true;
-        submitBtn.textContent = '⏳ Sending...';
-
-        try {
-            const response = await fetch(FORMSPREE_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({
-                    type: selectedType,
-                    message: message,
-                    email: email || 'Not provided',
-                    page: document.title,
-                    url: window.location.href,
-                    userAgent: navigator.userAgent.substring(0, 100)
-                })
-            });
-
-            if (response.ok) {
-                document.getElementById('fb-modal').innerHTML = `
-                    <div class="fb-success">
-                        <div class="fb-tick">✅</div>
-                        <h4>Thank you!</h4>
-                        <p>Your feedback has been received. We'll review it and improve the tool!</p>
-                        <button class="fb-submit" style="margin-top:15px; padding:12px 30px; font-size:14px;" onclick="closeFb()">Close</button>
-                    </div>
-                `;
-            } else {
-                throw new Error('Submission failed');
-            }
-        } catch (err) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = '📤 Send Feedback';
-            alert('Could not send feedback. Please try again or email us directly.');
-        }
-    };
-
-    function resetForm() {
-        // Rebuild modal content
-        const modal = document.getElementById('fb-modal');
-        if (modal) {
-            modal.innerHTML = `
-                <h3>💬 Send Feedback</h3>
-                <p class="fb-subtitle">Report a bug, suggest a feature, or share your thoughts!</p>
-                <div id="fb-page-info">📍 Page: <strong>${document.title || window.location.pathname}</strong></div>
-                <div class="fb-type-grid">
-                    <button class="fb-type-btn selected" onclick="fbSelectType(this, 'Bug Report')"><span>🐛</span>Bug</button>
-                    <button class="fb-type-btn" onclick="fbSelectType(this, 'Feature Request')"><span>💡</span>Idea</button>
-                    <button class="fb-type-btn" onclick="fbSelectType(this, 'General Feedback')"><span>💬</span>General</button>
-                    <button class="fb-type-btn" onclick="fbSelectType(this, 'Other')"><span>❓</span>Other</button>
+        <!-- CONVERTERS -->
+        <div class="category-section">
+            <h2 class="category-header">📐 Converters</h2>
+            <div class="tools-grid">
+                <a href="/unit-converter/" class="tool-card">
+                    <div class="icon">📏</div>
+                    <h2>Unit Converter</h2>
+                    <p>Convert between units of length, weight, temperature, volume, time and more with instant results.</p>
+                    <span class="tag">Convert</span>
+                </a>
+                <div class="tool-card coming-soon">
+                    <div class="icon">💱</div>
+                    <h2>Currency Converter</h2>
+                    <p>Convert between 150+ world currencies with live exchange rates. Quick and reliable.</p>
+                    <span class="tag">Finance</span>
                 </div>
-                <div class="fb-field"><label>Your Message *</label><textarea id="fb-message" placeholder="Describe the issue or suggestion in detail..."></textarea></div>
-                <div class="fb-field"><label>Your Email (optional — for follow-up)</label><input type="email" id="fb-email" placeholder="your@email.com"></div>
-                <div class="fb-footer">
-                    <button class="fb-cancel" onclick="closeFb()">Cancel</button>
-                    <button class="fb-submit" id="fb-submit-btn" onclick="submitFeedback()">📤 Send Feedback</button>
+                <div class="tool-card coming-soon">
+                    <div class="icon">🔢</div>
+                    <h2>Number Base Converter</h2>
+                    <p>Convert numbers between binary, octal, decimal, and hexadecimal systems instantly.</p>
+                    <span class="tag">Math</span>
                 </div>
-            `;
-            selectedType = 'Bug Report';
-        }
-    }
-})();
+            </div>
+        </div>
+
+        <!-- SECURITY TOOLS -->
+        <div class="category-section">
+            <h2 class="category-header">🔒 Security Tools</h2>
+            <div class="tools-grid">
+                <a href="/password-generator/" class="tool-card">
+                    <div class="icon">🔐</div>
+                    <h2>Password Generator</h2>
+                    <p>Generate strong, secure passwords with customizable length and character options to protect your accounts.</p>
+                    <span class="tag">Security</span>
+                </a>
+                <div class="tool-card coming-soon">
+                    <div class="icon">🔑</div>
+                    <h2>Hash Generator</h2>
+                    <p>Generate MD5, SHA-1, SHA-256 cryptographic hashes for any text. Useful for developers.</p>
+                    <span class="tag">Security</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEXT TOOLS -->
+        <div class="category-section">
+            <h2 class="category-header">✍️ Text Tools</h2>
+            <div class="tools-grid">
+                <a href="/word-counter/" class="tool-card">
+                    <div class="icon">📝</div>
+                    <h2>Word Counter</h2>
+                    <p>Count words, characters, sentences, and paragraphs in any text. Useful for essays and articles.</p>
+                    <span class="tag">Writing</span>
+                </a>
+                <a href="/case-converter/" class="tool-card">
+                    <div class="icon">🔤</div>
+                    <h2>Case Converter</h2>
+                    <p>Convert text between UPPERCASE, lowercase, Title Case, camelCase and more formats instantly.</p>
+                    <span class="tag">Writing</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- TIME TOOLS -->
+        <div class="category-section">
+            <h2 class="category-header">⏱️ Time Tools</h2>
+            <div class="tools-grid">
+                <a href="/stopwatch/" class="tool-card">
+                    <div class="icon">⏱️</div>
+                    <h2>Stopwatch & Timer</h2>
+                    <p>Online stopwatch with lap timer and countdown timer. Track time for workouts, cooking, study sessions and more.</p>
+                    <span class="tag">Time</span>
+                </a>
+                <a href="/pomodoro/" class="tool-card">
+                    <div class="icon">🍅</div>
+                    <h2>Pomodoro Timer</h2>
+                    <p>Boost productivity with the Pomodoro technique. Work in 25-minute focused sessions with timed breaks.</p>
+                    <span class="tag">Productivity</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- PDF TOOLS -->
+        <div class="category-section">
+            <h2 class="category-header">📄 PDF Tools</h2>
+            <div class="tools-grid">
+                <a href="/pdf-merger/" class="tool-card">
+                    <div class="icon">📄</div>
+                    <h2>PDF Merger</h2>
+                    <p>Combine multiple PDF files into one. Drag to reorder. Works in your browser — files never uploaded to any server.</p>
+                    <span class="tag">PDF</span>
+                </a>
+                <a href="/pdf-splitter/" class="tool-card">
+                    <div class="icon">✂️</div>
+                    <h2>PDF Splitter</h2>
+                    <p>Extract specific pages, split a PDF into individual pages, or extract a page range. Free and private.</p>
+                    <span class="tag">PDF</span>
+                </a>
+                <a href="/images-to-pdf/" class="tool-card">
+                    <div class="icon">🖼️</div>
+                    <h2>Images to PDF</h2>
+                    <p>Convert JPG, PNG, and WebP images into a PDF file. Combine multiple images into one PDF document.</p>
+                    <span class="tag">PDF</span>
+                </a>
+                <a href="/pdf-rotate/" class="tool-card">
+                    <div class="icon">🔄</div>
+                    <h2>PDF Rotate</h2>
+                    <p>Rotate PDF pages to correct orientation. Rotate individual pages or all pages at once.</p>
+                    <span class="tag">PDF</span>
+                </a>
+                <a href="/pdf-compress/" class="tool-card">
+                    <div class="icon">🗃️</div>
+                    <h2>PDF Compress</h2>
+                    <p>Reduce PDF file size while maintaining quality. Great for email attachments and uploads.</p>
+                    <span class="tag">PDF</span>
+                </a>
+                <a href="/pdf-to-images/" class="tool-card">
+                    <div class="icon">📸</div>
+                    <h2>PDF to Images</h2>
+                    <p>Convert PDF pages to JPG or PNG images. Extract images from any PDF document easily.</p>
+                    <span class="tag">PDF</span>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p>
+                <strong>Calculators:</strong>
+                <a href="/age-calculator/">Age</a> |
+                <a href="/bmi-calculator/">BMI</a> |
+                <a href="/percentage-calculator/">Percentage</a> |
+                <a href="/date-calculator/">Date</a> |
+                <a href="/loan-calculator/">Loan/EMI</a> |
+                <a href="/calorie-calculator/">Calories</a> |
+                <a href="/tip-calculator/">Tip</a> |
+                <a href="/mortgage-calculator/">Mortgage</a> |
+                <a href="/pregnancy-calculator/">Pregnancy</a>
+            </p>
+            <p>
+                <strong>Tools:</strong>
+                <a href="/unit-converter/">Unit Converter</a> |
+                <a href="/password-generator/">Password Generator</a> |
+                <a href="/word-counter/">Word Counter</a> |
+                <a href="/case-converter/">Case Converter</a> |
+                <a href="/stopwatch/">Stopwatch</a> |
+                <a href="/pomodoro/">Pomodoro</a>
+            </p>
+            <p>
+                <strong>PDF Tools:</strong>
+                <a href="/pdf-merger/">PDF Merger</a> |
+                <a href="/pdf-splitter/">PDF Splitter</a> |
+                <a href="/images-to-pdf/">Images to PDF</a>
+            </p>
+            <p>
+                <a href="/about.html">About Us</a> |
+                <a href="/contact.html">Contact</a> |
+                <a href="/privacy-policy.html">Privacy Policy</a> |
+                <a href="/terms-of-service.html">Terms of Service</a>
+            </p>
+            <p>&copy; 2026 Free Online Tools. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
