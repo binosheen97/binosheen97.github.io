@@ -213,7 +213,6 @@
     btn.id = 'fb-btn';
     btn.innerHTML = '💬 Feedback';
     btn.title = 'Send feedback or report an issue';
-    btn.onclick = openWidget;
     document.body.appendChild(btn);
 
     // Create overlay + modal
@@ -256,6 +255,9 @@
         overlay.classList.add('open');
         document.getElementById('fb-message').focus();
     };
+
+    // Attach click AFTER openWidget is defined
+    btn.onclick = window.openWidget;
 
     window.closeFb = function() {
         overlay.classList.remove('open');
