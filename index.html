@@ -437,20 +437,13 @@
                 <a href="/terms-of-service.html">Terms of Service</a>
             </p>
             <p>&copy; 2026 Free Online Tools. All rights reserved.</p>
-            <p id="site-visit-counter" style="font-size:12px; opacity:0.7; margin-top:4px;">🌍 Loading visitor count...</p>
+            <p style="margin-top:8px">
+                <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fbinosheen97.github.io&count_bg=%23667eea&title_bg=%23764ba2&icon=eye.svg&icon_color=%23FFFFFF&title=Site+Visitors&edge_flat=false"
+                     alt="Visitor Count"
+                     style="height:22px; vertical-align:middle;"
+                     onerror="this.parentElement.style.display='none'">
+            </p>
         </footer>
     </div>
-
-    <!-- Visitor counter for landing page total -->
-    <script>
-        fetch('https://api.countapi.xyz/hit/binosheen97-tools-v1/home')
-            .then(r => r.json())
-            .then(d => {
-                const el = document.getElementById('site-visit-counter');
-                if (el && d && d.value) el.innerHTML = '🌍 <strong>' + d.value.toLocaleString('en-US') + '</strong> total visits to this site';
-                else if (el) el.remove();
-            })
-            .catch(() => { const el = document.getElementById('site-visit-counter'); if(el) el.remove(); });
-    </script>
 </body>
 </html>
