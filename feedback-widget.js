@@ -213,6 +213,7 @@
     btn.id = 'fb-btn';
     btn.innerHTML = '💬 Feedback';
     btn.title = 'Send feedback or report an issue';
+    btn.onclick = openWidget;
     document.body.appendChild(btn);
 
     // Create overlay + modal
