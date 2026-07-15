@@ -347,34 +347,17 @@
     }
 
     // ===== VISITOR COUNTER =====
-    // Auto-adds page view counter to footer using CountAPI (free, no auth)
+    // Auto-adds page view counter to footer using hits.seeyoufarm.com (reliable image badge)
     function addVisitorCounter() {
         const footer = document.querySelector('footer');
         if (!footer) return;
 
-        // Generate a clean key from current page path
-        const path = window.location.pathname.replace(/\//g, '-').replace(/^-|-$/g, '') || 'home';
-        const namespace = 'binosheen97-tools-v1';
-
-        // Create counter element in footer
+        // Encode current page URL for the badge
+        const pageUrl = encodeURIComponent(window.location.href);
         const counterEl = document.createElement('p');
-        counterEl.id = 'fb-visit-counter';
-        counterEl.style.cssText = 'font-size:12px; opacity:0.7; margin-top:8px;';
-        counterEl.innerHTML = '🌍 Loading visitor count...';
+        counterEl.style.cssText = 'margin-top:8px; line-height:1';
+        counterEl.innerHTML = `<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=${pageUrl}&count_bg=%23667eea&title_bg=%23764ba2&icon=eye.svg&icon_color=%23FFFFFF&title=Views&edge_flat=false" alt="View Count" style="height:20px; vertical-align:middle;" onerror="this.parentElement.style.display='none'">`;
         footer.appendChild(counterEl);
-
-        // Hit CountAPI to increment and get count
-        fetch(`https://api.countapi.xyz/hit/${namespace}/${path}`)
-            .then(r => r.json())
-            .then(data => {
-                if (data && data.value) {
-                    const count = data.value.toLocaleString('en-US');
-                    counterEl.innerHTML = `🌍 <strong>${count}</strong> views on this page`;
-                } else {
-                    counterEl.remove();
-                }
-            })
-            .catch(() => counterEl.remove()); // silent fail
     }
 
     // Run counter after DOM is ready
