@@ -345,4 +345,43 @@
             selectedType = 'Bug Report';
         }
     }
+
+    // ===== VISITOR COUNTER =====
+    // Auto-adds page view counter to footer using CountAPI (free, no auth)
+    function addVisitorCounter() {
+        const footer = document.querySelector('footer');
+        if (!footer) return;
+
+        // Generate a clean key from current page path
+        const path = window.location.pathname.replace(/\//g, '-').replace(/^-|-$/g, '') || 'home';
+        const namespace = 'binosheen97-tools-v1';
+
+        // Create counter element in footer
+        const counterEl = document.createElement('p');
+        counterEl.id = 'fb-visit-counter';
+        counterEl.style.cssText = 'font-size:12px; opacity:0.7; margin-top:8px;';
+        counterEl.innerHTML = '🌍 Loading visitor count...';
+        footer.appendChild(counterEl);
+
+        // Hit CountAPI to increment and get count
+        fetch(`https://api.countapi.xyz/hit/${namespace}/${path}`)
+            .then(r => r.json())
+            .then(data => {
+                if (data && data.value) {
+                    const count = data.value.toLocaleString('en-US');
+                    counterEl.innerHTML = `🌍 <strong>${count}</strong> views on this page`;
+                } else {
+                    counterEl.remove();
+                }
+            })
+            .catch(() => counterEl.remove()); // silent fail
+    }
+
+    // Run counter after DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', addVisitorCounter);
+    } else {
+        addVisitorCounter();
+    }
+
 })();
