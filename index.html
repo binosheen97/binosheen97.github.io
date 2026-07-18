@@ -245,6 +245,63 @@
             line-height: 1.7;
             font-size: 15px;
         }
+		.category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.category-nav a {
+    padding: 12px 18px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.category-nav a:hover {
+    background: white;
+    color: #667eea;
+}
+
+.popular-tools {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.popular-tools h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.quick-links a {
+    padding: 10px 15px;
+    background: #f4f6ff;
+    color: #667eea;
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.quick-links a:hover {
+    background: #667eea;
+    color: white;
+}
     </style>
 	<script type="application/ld+json">
 {
@@ -301,9 +358,18 @@
             <h1>🛠️ Free Online Tools</h1>
             <p class="subtitle">Fast, accurate, and easy-to-use tools for everyday needs — completely free, no registration required!</p>
         </header>
+		
+		<div class="category-nav">
+            <a href="#calculators">🧮 Calculators</a>
+            <a href="#pdf-tools">📄 PDF Tools</a>
+            <a href="#converters">📐 Converters</a>
+            <a href="#security-tools">🔒 Security Tools</a>
+            <a href="#text-tools">✍️ Text Tools</a>
+            <a href="#time-tools">⏱️ Time Tools</a>
+        </div>
 
         <!-- CALCULATORS -->
-        <div class="category-section">
+        <div class="category-section" id="calculators">
             <h2 class="category-header">🧮 Calculators</h2>
             <div class="tools-grid">
                 <a href="/age-calculator/" class="tool-card">
@@ -364,7 +430,7 @@
         </div>
 
         <!-- CONVERTERS -->
-        <div class="category-section">
+        <div class="category-section" id="converters">
             <h2 class="category-header">📐 Converters</h2>
             <div class="tools-grid">
                 <a href="/unit-converter/" class="tool-card">
@@ -389,7 +455,7 @@
         </div>
 
         <!-- SECURITY TOOLS -->
-        <div class="category-section">
+        <div class="category-section" id="security-tools">
             <h2 class="category-header">🔒 Security Tools</h2>
             <div class="tools-grid">
                 <a href="/password-generator/" class="tool-card">
@@ -408,7 +474,7 @@
         </div>
 
         <!-- TEXT TOOLS -->
-        <div class="category-section">
+        <div class="category-section" id="text-tools">
             <h2 class="category-header">✍️ Text Tools</h2>
             <div class="tools-grid">
                 <a href="/word-counter/" class="tool-card">
@@ -427,7 +493,7 @@
         </div>
 
         <!-- TIME TOOLS -->
-        <div class="category-section">
+        <div class="category-section" id="time-tools">
             <h2 class="category-header">⏱️ Time Tools</h2>
             <div class="tools-grid">
                 <a href="/stopwatch/" class="tool-card">
@@ -446,7 +512,7 @@
         </div>
 
         <!-- PDF TOOLS -->
-        <div class="category-section">
+        <div class="category-section" id="pdf-tools">
             <h2 class="category-header">📄 PDF Tools</h2>
             <div class="tools-grid">
                 <a href="/pdf-merger/" class="tool-card">
