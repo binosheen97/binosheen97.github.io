@@ -207,7 +207,88 @@
             .tools-grid { grid-template-columns: 1fr; }
             .category-header { font-size: 20px; }
         }
+		
+		/* FAQ Section */
+        .faq-container {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .faq-question {
+            font-size: 18px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer {
+            color: #555;
+            line-height: 1.7;
+            font-size: 15px;
+        }
     </style>
+	<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"Are all tools on this website completely free?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Yes. All calculators, PDF tools, converters, security tools, and productivity tools are completely free to use."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Do I need to create an account to use the tools?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"No account is required. Simply open any tool and start using it immediately from your browser."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Are the PDF files uploaded to a server?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Most PDF tools are designed to process files directly in your browser whenever possible."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Are the calculator results accurate?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Our calculators use standard formulas and commonly accepted calculation methods."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Can I use these tools on mobile devices?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Yes. All tools are designed to work on desktop computers, tablets, and mobile phones."
+      }
+    }
+  ]
+}
+</script>
+</script>
 </head>
 <body>
     <div class="container">
@@ -487,6 +568,77 @@
                      style="height:22px; vertical-align:middle;"
                      onerror="this.parentElement.style.display='none'">
             </p>
+			<!-- FAQ SECTION -->
+        <div class="category-section">
+            <h2 class="category-header">❓ Frequently Asked Questions</h2>
+        
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are all tools on this website completely free?
+                    </div>
+                    <div class="faq-answer">
+                        Yes. All calculators, PDF tools, converters, security tools,
+                        and productivity tools are completely free to use with no
+                        registration, subscription, or hidden charges.
+                    </div>
+                </div>
+        
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do I need to create an account to use the tools?
+                    </div>
+                    <div class="faq-answer">
+                        No account is required. Simply open any tool and start using it
+                        immediately from your browser.
+                    </div>
+                </div>
+        
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are the PDF files uploaded to a server?
+                    </div>
+                    <div class="faq-answer">
+                        Most PDF tools are designed to process files directly in your
+                        browser whenever possible. This helps improve privacy and keeps
+                        your documents under your control.
+                    </div>
+                </div>
+        
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are the calculator results accurate?
+                    </div>
+                    <div class="faq-answer">
+                        Our calculators use standard formulas and commonly accepted
+                        calculation methods. For critical financial, legal, or medical
+                        decisions, always verify the results independently.
+                    </div>
+                </div>
+        
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I use these tools on mobile devices?
+                    </div>
+                    <div class="faq-answer">
+                        Yes. All tools are designed to work on desktop computers,
+                        tablets, and mobile phones with a responsive layout.
+                    </div>
+                </div>
+        
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What types of tools are available?
+                    </div>
+                    <div class="faq-answer">
+                        Free Online Tools currently provides calculators, PDF tools,
+                        converters, password generators, text tools, and productivity
+                        tools, with additional tools being added regularly.
+                    </div>
+                </div>
+            </div>
+        </div>
+`
         </footer>
     </div>
 </body>
